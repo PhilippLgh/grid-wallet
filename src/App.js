@@ -19,13 +19,18 @@ class App extends Component {
         geth
       })
       console.log('geth state', geth.getState())
-      geth.on('started', () => {
-        console.log('geth started')
+      geth.on('newState', newState => {
+        if (newState === 'started') {
+          console.log('geth started')
+        }
       })
       if (geth.getState() === 'CONNECTED') {
         this.setConnected()
       } else {
-        geth.on('connected', this.setConnected)
+        geth.on('newState', newState => {
+          if (newState === 'connected') {
+            this.setConnected()
+          })
       }
     } else {
       this.setState({
