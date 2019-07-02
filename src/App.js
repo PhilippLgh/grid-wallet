@@ -30,7 +30,8 @@ class App extends Component {
         geth.on('newState', newState => {
           if (newState === 'connected') {
             this.setConnected()
-          })
+          }
+        })
       }
     } else {
       this.setState({
